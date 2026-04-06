@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ooing</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="header-row">
+        <div class="header-main">
+          <h1>Ooing</h1>
+          <p class="subtitle">카드명세서 → 후잉 업로더</p>
+        </div>
+        <button id="btn-settings" class="btn-settings" title="설정">&#9881;</button>
+      </div>
+    </header>
+
+    <!-- 인증 안 된 상태 -->
+    <div id="auth-required" class="section" style="display: none;">
+      <p class="message">후잉 API 인증이 필요합니다.</p>
+      <button id="btn-open-settings" class="btn btn-primary">설정 열기</button>
+    </div>
+
+    <!-- 메인 화면 -->
+    <div id="main-content" style="display: none;">
+
+      <!-- 현재 페이지 정보 -->
+      <div id="page-info-area" class="section">
+        <div class="page-info">
+          <span class="page-icon">&#127760;</span>
+          <span id="page-title" class="page-title">페이지 감지 중...</span>
+        </div>
+      </div>
+
+      <!-- 읽어오기 버튼 -->
+      <div id="scrape-area" class="section">
+        <button id="btn-scrape" class="btn btn-accent">
+          <span class="btn-icon">&#8595;</span>
+          현재 페이지에서 명세서 읽기
+        </button>
+        <p class="hint">카드사 이메일 명세서를 브라우저에서 열고 이 버튼을 누르세요.<br>지원: 삼성카드, 현대카드</p>
+      </div>
+
+      <!-- 카드사 감지 결과 -->
+      <div id="card-info" class="section" style="display: none;">
+        <div class="card-badge">
+          <span id="card-name" class="badge"></span>
+          <span id="parser-version" class="badge-sub"></span>
+        </div>
+      </div>
+
+      <!-- 섹션 선택 + 합계 -->
+      <div id="section-area" class="section" style="display: none;">
+        <div class="section-row">
+          <div class="section-col-main">
+            <label class="label" for="section-select">후잉 섹션</label>
+            <select id="section-select" class="select">
+              <option value="">섹션을 선택하세요</option>
+            </select>
+          </div>
+          <div class="section-col-total">
+            <label class="label-sm">명세서 합계</label>
+            <span id="initial-total" class="total-amount">0원</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 전체 일괄 계정 선택 -->
+      <div id="bulk-account-area" class="section" style="display: none;">
+        <div class="bulk-row">
+          <div class="bulk-col">
+            <label class="label-sm">왼쪽(차변) 일괄</label>
+            <div id="bulk-l-wrap"></div>
+          </div>
+          <div class="bulk-col">
+            <label class="label-sm">오른쪽(대변) 일괄</label>
+            <div id="bulk-r-wrap"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 거래 내역 목록 -->
+      <div id="entries-area" class="section" style="display: none;">
+        <div id="entries-list"></div>
+
+        <!-- 페이지네이션 -->
+        <div id="pagination" class="pagination"></div>
+
+        <!-- 업로드 버튼 -->
+        <div class="action-bar">
+          <button id="btn-upload" class="btn btn-primary" disabled>
+            업로드 (<span id="upload-count">0</span>/<span id="total-count">0</span>)
+          </button>
+        </div>
+      </div>
+
+      <!-- 진행 상태 -->
+      <div id="progress-section" class="section" style="display: none;">
+        <div class="progress-bar">
+          <div id="progress-fill" class="progress-fill"></div>
+        </div>
+        <p id="progress-text" class="progress-text">업로드 준비 중...</p>
+      </div>
+
+      <!-- 결과 메시지 -->
+      <div id="result-section" class="section" style="display: none;">
+        <div id="result-message" class="result-message"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="../lib/whooing-api.js"></script>
+  <script src="../lib/card-parser.js"></script>
+  <script src="../lib/parsers/index.js"></script>
+  <script src="../lib/parsers/samsung-v1.js"></script>
+  <script src="../lib/parsers/hyundai-v1.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

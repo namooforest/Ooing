@@ -1,0 +1,44 @@
+{
+  "manifest_version": 3,
+  "name": "Ooing - 카드명세서 → 후잉 업로더",
+  "version": "1.0.0",
+  "description": "카드 명세서를 파싱하여 후잉(Whooing) 가계부에 자동으로 업로드합니다.",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://whooing.com/*",
+    "https://*/*",
+    "http://*/*"
+  ],
+  "action": {
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "options_page": "options/options.html",
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "lib/page-scraper.js",
+        "lib/card-parser.js",
+        "lib/parsers/index.js",
+        "lib/parsers/samsung-v1.js",
+        "lib/parsers/hyundai-v1.js"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

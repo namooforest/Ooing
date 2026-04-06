@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ooing 설정</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>Ooing 설정</h1>
+      <p class="subtitle">후잉 API 연동 설정</p>
+    </header>
+
+    <!-- 인증 방식 선택 -->
+    <section class="card">
+      <h2>인증 설정</h2>
+      <div class="field">
+        <label class="label">인증 방식</label>
+        <select id="auth-method" class="select">
+          <option value="apikey">API Key (AI 연동 키)</option>
+          <option value="oauth2">OAuth 2.0 (배포용 앱)</option>
+        </select>
+      </div>
+
+      <!-- API Key 방식 -->
+      <div id="auth-apikey" class="auth-section">
+        <div class="field">
+          <label class="label" for="api-key">API Key</label>
+          <input type="password" id="api-key" class="input"
+            placeholder="후잉 > 계정 > 비밀번호 및 보안 > AI 연동에서 발급">
+          <p class="hint">후잉 홈페이지 우측 상단 > 계정 > 비밀번호 및 보안 > [+AI 연동]에서 발급받으세요.</p>
+        </div>
+      </div>
+
+      <!-- OAuth 2.0 방식 -->
+      <div id="auth-oauth2" class="auth-section" style="display: none;">
+        <div class="field">
+          <label class="label" for="app-id">App ID (client_id)</label>
+          <input type="text" id="app-id" class="input" placeholder="등록된 App의 ID">
+        </div>
+        <div class="field">
+          <label class="label" for="app-secret">App Secret</label>
+          <input type="password" id="app-secret" class="input" placeholder="등록된 App의 Secret">
+        </div>
+        <div class="field">
+          <label class="label" for="access-token">Access Token</label>
+          <input type="password" id="access-token" class="input" placeholder="발급받은 Access Token">
+        </div>
+        <div class="field">
+          <label class="label" for="refresh-token">Refresh Token</label>
+          <input type="password" id="refresh-token" class="input" placeholder="발급받은 Refresh Token">
+        </div>
+      </div>
+
+      <button id="btn-test" class="btn btn-secondary">연결 테스트</button>
+      <div id="test-result" class="test-result" style="display: none;"></div>
+    </section>
+
+    <!-- 저장 -->
+    <div class="action-bar">
+      <button id="btn-save" class="btn btn-primary">설정 저장</button>
+    </div>
+
+    <div id="save-result" class="save-result" style="display: none;"></div>
+  </div>
+
+  <script src="../lib/whooing-api.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>
